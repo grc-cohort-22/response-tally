@@ -49,6 +49,8 @@ public class Tallyer {
      * @param topics a list of strings representing the topics to be tallied
      * @return a map containing topics as keys and their occurrence counts as values
      */
+    // javac src/Tallyer.java
+    // java -cp src Tallyer < bigResponses.txt
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
@@ -80,9 +82,43 @@ public class Tallyer {
      * @return a map containing topics as keys and their occurrence counts as values
      */
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
-      // WAVE 2
-      // TODO: Implement this method
-    
-      return null;
-  }
+
+        // counts how many times it appears in ids list
+        Map<String, Integer> Idcount = new HashMap<>();
+        // TODO: Implement this method
+        for (String eachID : ids){
+            if (!Idcount.containsKey(eachID)) {
+                Idcount.put(eachID, 1);
+            }
+            else {
+                int currentID = Idcount.get(eachID);
+                int newID = currentID + 1;
+                Idcount.put(eachID, newID);
+            }
+        }
+        //checks if each ids appear no more or less than 2
+        List<String> IdRemove = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : Idcount.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            if (value != 2) {
+                IdRemove.add(key);
+            }
+        }
+
+        // loops through ids and topics, if the current itteration id is not in the IDremove add it in, else dont do anytnign
+        Map<String, Integer> BigResponses = new HashMap<>();
+        for (int i = 0; i < ids.size(); i++) {
+            String id = ids.get(i);
+            String topic = topics.get(i);
+            if (!IdRemove.contains(id)) {
+                BigResponses.put(topic, BigResponses.getOrDefault(topic, 0) + 1);
+            }
+        }
+
+        
+        // System.out.println(IdRemove);
+        return BigResponses;
+        // return null;
+    }
 }
