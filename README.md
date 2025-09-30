@@ -42,7 +42,6 @@ For the sample file, a correct output would look similar to:
 ```
 The order is unimportant.
 
-As an extra test, try downloading your class' data from Canvas and checking that your program properly handles it.
 
 ### Wave 2
 Implement `tallyTopicsFiltered`. Read the Javadoc carefully to understand what the method is meant to do. Make sure to compile your code each time before running it!
