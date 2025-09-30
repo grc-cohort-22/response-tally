@@ -50,6 +50,12 @@ public class Tallyer {
      * @return a map containing topics as keys and their occurrence counts as values
      */
     public static Map<String, Integer> tallyTopics(List<String> topics) {
+        //Psudo code
+        /*
+         * goal we want the occurrences of each topic aka each time it appear
+         * we want to create a HashMap with the topics as the keys and its frequecy
+         * this will be done through a if statment a and a for each loop
+         */
         // WAVE 1
         // TODO: Implement this method
 
