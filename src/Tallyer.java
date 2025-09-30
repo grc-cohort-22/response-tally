@@ -85,7 +85,37 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
-      return null;
+        Map<String, Integer> idCount = new TreeMap<>();
+        Map<String, Integer> topicCount = new HashMap<>();
+        for(String id: ids){
+            if(!idCount.containsKey(id)){
+                idCount.put(id, 1);
+            }else{
+                int currentCount = idCount.get(id);
+                int newCount = currentCount +1;
+                idCount.put(id, newCount);
+            }
+        }
+        System.out.println("Before removing the 2 entries:" + idCount);
+
+       idCount.entrySet().removeIf(entry -> entry.getValue() != 2);
+
+        System.out.println(idCount);
+        for(int i = 0; i < ids.size(); i++){
+            String currentId = ids.get(i);
+            if(idCount.containsKey(currentId)){
+                String currentTopic = topics.get(i);
+                if(!topicCount.containsKey(currentTopic)){
+                    topicCount.put(currentTopic, 1);
+                 }else{
+                    int currentCount = topicCount.get(currentTopic);
+                    int newCount = currentCount +1;
+                topicCount.put(currentTopic, newCount);       
+            }
+                
+            }
+        }
+      return topicCount;
     }
 }
 
