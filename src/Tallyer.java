@@ -1,6 +1,7 @@
+/* Name: Anthony Kravchishin */
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Scanner;
 
 /**
@@ -52,8 +53,16 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
-
-        return null;
+        Map<String, Integer> topicCount = new HashMap<>();
+        for (String topic : topics) {
+            if (!topicCount.containsKey(topic)) {
+                topicCount.put(topic, 1);
+            } else {
+                topicCount.put(topic, topicCount.get(topic) + 1);
+            }
+        }
+        return topicCount;
+    }
     }
 
     /**
