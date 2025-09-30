@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -53,7 +54,21 @@ public class Tallyer {
         // WAVE 1
         // TODO: Implement this method
 
-        return null;
+        Map<String, Integer> x = new HashMap<>();
+
+        for (String word : topics) {
+            if (!x.containsKey(word)) {
+                x.put(word, 1);
+            }
+            else {
+                int temp = x.get(word) + 1;
+                x.put(word, temp);
+            }
+        }
+        
+// given list of topics, if topic is new in map,
+
+        return x;
     }
 
     /**
