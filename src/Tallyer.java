@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -32,13 +33,14 @@ public class Tallyer {
         
         // Wave 1
         Map<String, Integer> topicCounts = tallyTopics(topics);
-        System.out.println("Here are how many times each topic appears (unfiltered):");
+        System.out.println("\nHere are how many times each topic appears (unfiltered):");
         System.out.println(topicCounts);
 
         // Wave 2
         Map<String, Integer> topicCountsFiltered = tallyTopicsFiltered(ids, topics);
-        System.out.println("Here are how many times each topic appears (filtered):");
+        System.out.println("\nHere are how many times each topic appears (filtered):");
         System.out.println(topicCountsFiltered);
+        System.out.println("\n");
     }
 
     /**
@@ -52,8 +54,17 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
+        Map<String, Integer> tallied = new HashMap<>();
 
-        return null;
+        for (String topic : topics){
+            if (!tallied.containsKey(topic)){
+                tallied.put(topic, 1);
+            } else {
+                tallied.put(topic, tallied.get(topic) + 1);
+            }
+        }
+
+        return tallied;
     }
 
     /**
@@ -71,7 +82,38 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
+      Map<String, Integer> userCount = new HashMap<>();
+      List<String> banList = new ArrayList<>();
 
-      return null;
+      for (String userId : ids){
+        if (!userCount.containsKey(userId)){
+            userCount.put(userId, 1);
+        } else {
+            userCount.put(userId, userCount.get(userId) + 1);
+        }
+      }
+
+      for (String userId : userCount.keySet()){
+        if (userCount.get(userId) > 2){
+            banList.add(userId);
+        }
+      }
+
+      Map<String, Integer> filteredTopicVotes = new HashMap<>();
+
+      for (int i = 0; i < ids.size(); i++){
+        String currentId = ids.get(i);
+        String currentTopic = topics.get(i);
+        if (!banList.contains(currentId)){
+            if (!filteredTopicVotes.containsKey(currentTopic)){
+                filteredTopicVotes.put(currentTopic, 1);
+            } else {
+                filteredTopicVotes.put(currentTopic, filteredTopicVotes.get(currentTopic) + 1);
+            }
+        }
+      }
+
+
+      return filteredTopicVotes;
   }
 }
