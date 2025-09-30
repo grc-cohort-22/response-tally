@@ -27,6 +27,7 @@ Look at `Tallyer.java` to see the already provided code. Take a look over it and
 1. Verify you are in the `response-tally` directory by running `pwd` (print working directory) on the terminal. The printed directory should end in `response-tally`.
 1. Compile the Java files by running `javac src/Tallyer.java`
 1. Run the main method of Tallyer by running `java -cp src Tallyer < responses.txt`
+1. You should expect that it will say "null" for how many times each topic appears. This is because you have not completed the assignment yet. Once completed, it will show the proper tallies.
 
 ## Submitting
 Once you have completed the below section (Modifying the Code), please open a Pull Request (PR). Please copy and paste your PR URL into Canvas to receive credit. Include your attempt at Wave 2, even if you did not complete it.
@@ -36,14 +37,16 @@ Once you have completed the below section (Modifying the Code), please open a Pu
 ### Wave 1 (Required)
 Implement `tallyTopics`. Read the Javadoc carefully to understand what the method is meant to do. Make sure to compile your code each time before running it!
 
-For the sample file, a correct output would look similar to:
+For the sample `responses.txt` file, a correct output would look similar to:
 ```
 {maps=2, lists=1, loops=1, arrays=2, compound=1}
 ```
 The order is unimportant.
 
+Try also running it on `bigResponses.txt` and see the result.
 
-### Wave 2
+
+### Wave 2 (Get as far as you can)
 Implement `tallyTopicsFiltered`. Read the Javadoc carefully to understand what the method is meant to do. Make sure to compile your code each time before running it!
 
 For the above sample file, a correct output would look similar to:
@@ -51,6 +54,8 @@ For the above sample file, a correct output would look similar to:
 {maps=1, loops=1, arrays=2}
 ```
 The order is unimportant.
+
+Try also running it on `bigResponses.txt` and see the result.
 
 ### Extra Challenges (Entirely optional)
 Some more ways to exercise:
