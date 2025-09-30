@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -52,11 +53,23 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
+        Map<String, Integer> topicCount = new HashMap<>();
 
-        return null;
+        for (String word : topics){
+            if (!topicCount.containsKey(word)) {
+                topicCount.put(word, 1);
+            }
+            else{
+                int currentCount = topicCount.get(word);
+                int newCount = currentCount + 1;
+                topicCount.put(word, newCount);
+            }
+        }
+
+        return topicCount;
     }
 
-    /**
+    /** 
      * Tally the occurrences of valid votes for each topic from the provided lists of IDs and topics.
      * 
      * The lists are of equal length and are aligned: the id at index zero cast a vote for
@@ -68,10 +81,60 @@ public class Tallyer {
      * @param topics a list of strings representing the topics to be tallied
      * @return a map containing topics as keys and their occurrence counts as values
      */
+
+    // Keep IDs
+    // --Initizilze ID with count
+    // Check if its a repeat TOPIC vote
+    // COUNT amount of times Voted
+    // REMOVE any voters who voted != 2
+    // RETURN TOPIC as Keys + COUNTS as Values
+
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
 
-      return null;
-  }
+      
+
+    //   ------------------------------------------------
+      Map<String, Integer> Uservotes = new HashMap<>();
+      List<String> banList = new ArrayList<>();
+      for (String id: ids){
+        if (!Uservotes.containsKey(id)) {
+            Uservotes.put(id, 1);
+        }
+        else {
+            Uservotes.put(id, Uservotes.get(id) + 1);
+        }
+
+      }
+
+
+
+      for (String id : ids) {
+        if (Uservotes.get(id) != 2) {
+            banList.add(id);
+        }
+      }
+
+      Map<String, Integer> topicCount = new HashMap<>();
+
+      for (int i = 0; i < ids.size(); i++) {
+        if (!banList.contains(ids.get(i))){
+            if (!topicCount.containsKey(topics.get(i))) {
+                topicCount.put(topics.get(i), 1);
+            } else {
+                topicCount.put(topics.get(i), topicCount.get(topics.get(i))+ 1);
+            }
+        }
+      }
+      
+
+
+      
+
+
+
+    
+    return topicCount;
+    }
 }
