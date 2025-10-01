@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -51,9 +52,19 @@ public class Tallyer {
      */
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
-        // TODO: Implement this method
 
-        return null;
+        Map<String, Integer> topicCounts = new HashMap<>();
+        for (String topic : topics) {
+            if(!topicCounts.containsKey(topic)){
+                topicCounts.put(topic, 1);
+            }
+            else {
+                int currentCount = topicCounts.get(topic);
+                int newCount = currentCount + 1;
+                topicCounts.put(topic, newCount);
+            }
+        }
+        return topicCounts;
     }
 
     /**
