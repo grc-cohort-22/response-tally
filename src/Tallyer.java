@@ -53,18 +53,18 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
-        Map<String, Integer> topicCounts = new HashMap<>();
+        Map<String, Integer> counts = new HashMap<>();
         for (String word : topics) {
-            if (!topicCounts.containsKey(word)) {
-                topicCounts.put(word,1);
+            if (!counts.containsKey(word)) {
+                counts.put(word,1);
             } else {
-                int currentCount = topicCounts.get(word);
+                int currentCount = counts.get(word);
                 int newCount = currentCount + 1;
-                topicCounts.put(word, newCount);
+                counts.put(word, newCount);
             }
         }
         
-        return topicCounts;
+        return counts;
     }
 
     /**
@@ -82,6 +82,20 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
+      Map<String, Integer> idCounts = new HashMap<>();
+      Map<String, Integer> validCounts = new HashMap<>();
+      
+      for (String word : ids) {
+        if (!idCounts.containsKey(word)) {
+            idCounts.put(word,1);
+        } else {
+            int currentCount = idCounts.get(word);
+            int newCount = currentCount + 1;
+            idCounts.put(word, newCount);
+        }
+
+      for (String word : )  
+      }
 
       return null;
   }
