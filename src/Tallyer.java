@@ -92,7 +92,21 @@ public class Tallyer {
          */
       // WAVE 2
       // TODO: Implement this method
+      HashMap<String, Integer> tallyOfOnlyTwo = new HashMap<>();
+      HashMap<String, Integer> tallyOfOnlyTwoFinal = new HashMap<>();
+      for (String id : ids) {
+        if (!tallyOfOnlyTwo.containsKey(id)) {
+            tallyOfOnlyTwo.put(id, 1);
+        } else{
+            tallyOfOnlyTwo.put(id, tallyOfOnlyTwo.get(id) + 1);
+        }
+      }
+      for(Map.Entry<String, Integer> entry : tallyOfOnlyTwo.entrySet()){
+        if (entry.getValue() == 2) {
+            tallyOfOnlyTwoFinal.put(entry.getKey(), entry.getValue());
+        }
+      }
 
-      return null;
+      return tallyOfOnlyTwoFinal;
   }
 }
