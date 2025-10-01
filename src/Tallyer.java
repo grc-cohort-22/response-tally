@@ -38,7 +38,6 @@ public class Tallyer {
         // Wave 1
         Map<String, Integer> topicCounts = tallyTopics(topics);
         System.out.println("Here are how many times each topic appears (unfiltered):");
-        System.out.println(ids);
         System.out.println(topicCounts);
 
         // Wave 2
@@ -94,6 +93,21 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
         // WAVE 2
         // TODO: Implement this method
+
+        // Votes map
+        Map<String, Integer> votes = new HashMap<>();
+
+        // Populate map
+        for (String id : ids) {
+            // Check if the id is already in the map
+            if (!votes.containsKey(id)) {
+                votes.put(id, 1);
+            } else {
+                votes.put(id, votes.get(id) + 1);
+            }
+        }
+
+        // Disqualify any vote that does not have two topics
 
         return null;
     }
