@@ -22,7 +22,8 @@ public class Tallyer {
 
         List<String> ids = new ArrayList<>();
         List<String> topics = new ArrayList<>();
-        
+
+
         // Reading input for IDs and topics
         // Assumes file is well formed into pairs
         while (input.hasNext()) {
@@ -71,7 +72,7 @@ public class Tallyer {
      * Tally the occurrences of valid votes for each topic from the provided lists of IDs and topics.
      * 
      * The lists are of equal length and are aligned: the id at index zero cast a vote for
-     * the topic at endex 0, the id at index 1 cast a vote for the topic at index 1, etc.
+     * the topic at index 0, the id at index 1 cast a vote for the topic at index 1, etc.
      * It returns a map where each topic is associated with the number of times it appears in the input.
      * However, any user who did not enter exactly 2 topics should not have their votes counted.
      *
@@ -81,8 +82,45 @@ public class Tallyer {
      */
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
-      // TODO: Implement this method
-
-      return null;
-  }
-}
+      // Loop through the ids to find their frequency.
+        Map<String, Integer> idCounts = new HashMap<>();
+        for (String id : ids) {
+            if (!idCounts.containsKey(id)) {
+                idCounts.put(id, 1);
+            }
+            else {
+                int currentCountOfId = idCounts.get(id);
+                int newCountOfId = currentCountOfId + 1;
+                idCounts.put(id, newCountOfId);
+            }
+        }
+        System.out.println(idCounts);
+        List<String> badIdsList = new ArrayList<>();
+        // find bad ids and put it into an ArrayList.
+        for (Map.Entry<String, Integer> entry : idCounts.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+                if (value != 2) {
+                badIdsList.add(key);
+            }
+        }
+        System.out.println(badIdsList);
+        // Print only those topics that do not contain the bad ids.
+        Map<String, Integer> filteredTopicCounts = new HashMap<>();
+        for (int i = 0; i < ids.size(); i++) {
+            String currentId = ids.get(i);
+            String currentTopic = topics.get(i);
+            if (!badIdsList.contains(currentId)) {
+                if (!filteredTopicCounts.containsKey(currentTopic)) {
+                    filteredTopicCounts.put(currentTopic, 1);
+            }
+            else {
+                int currentCount = filteredTopicCounts.get(currentTopic);
+                int newCount = currentCount + 1;
+                filteredTopicCounts.put(currentTopic, newCount);
+            }
+        }
+    }
+        return filteredTopicCounts;
+    }
+};
