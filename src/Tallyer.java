@@ -48,26 +48,28 @@ public class Tallyer {
 
     /**
      * Tally the occurrences of each topic from the provided list of topics.
-     * This method takes a list of topics. It returns a Map where the keys are topics
+     * This method takes a list of topics. It returns a Map where the keys are
+     * topics
      * and the values are how many times they appear in the input.
      *
      * @param topics a list of strings representing the topics to be tallied
      * @return a map containing topics as keys and their occurrence counts as values
      * 
-     * // Wave 1
-        Map<String, Integer> topicCounts = tallyTopics(topics);
-        System.out.println("Here are how many times each topic appears (unfiltered):");
-        System.out.println(topicCounts);
-
+     *         // Wave 1
+     *         Map<String, Integer> topicCounts = tallyTopics(topics);
+     *         System.out.println("Here are how many times each topic appears
+     *         (unfiltered):");
+     *         System.out.println(topicCounts);
+     * 
      */
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
-        Map<String, Integer> topicCountss = new HashMap<>()
-        for(String topic: topics){
-            if(!topicCountss.containsKey(topic)){
+        Map<String, Integer> topicCountss = new HashMap<>();
+        for (String topic : topics) {
+            if (!topicCountss.containsKey(topic)) {
                 topicCountss.put(topic, 1);
-            }else{
+            } else {
                 int currentTally = topicCountss.get(topic);
                 int newTally = currentTally + 1;
                 topicCountss.put(topic, newTally);
@@ -75,7 +77,7 @@ public class Tallyer {
 
         }
 
-        return null;
+        return topicCountss;
     }
 
     /**
