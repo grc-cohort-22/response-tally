@@ -1,6 +1,7 @@
+/* Name: Anthony kravchishin */
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Scanner;
 
 /**
@@ -52,8 +53,16 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
-
-        return null;
+        Map<String, Integer> topicCount = new HashMap<>();
+        for (String topic : topics) {
+            if (!topicCount.containsKey(topic)) {
+                topicCount.put(topic, 1);
+            } else {
+                topicCount.put(topic, topicCount.get(topic) + 1);
+            }
+        }
+        return topicCount;
+    
     }
 
     /**
@@ -71,7 +80,20 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
+      Map<String, Integer> topicCount = new HashMap<>();
+      Map<String, Integer> idCount = new HashMap<>();
+      for (String id : ids) {
+        idCount.put(id, idCount.get(id, 0) + 1);
+    }
+    for (int i = 0; i < ids.size(); i++) {
+        String id = ids.get(i);
+        String topic = topics.get(i);
 
-      return null;
+        if (idCount.get(id) == 2) {
+            topicCount.put(topic, topicCount.get(topic, 0) + 1);
+        }
+    }
+
+    return topicCount;
   }
 }
