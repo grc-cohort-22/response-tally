@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 /**
  * The Tallyer class provides functionality for reading ID and topic pairs from user input,
@@ -51,16 +52,31 @@ public class Tallyer {
      */
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
-        // TODO: Implement this method
+        Map<String, Integer> tallyMap = new TreeMap<>();
+        int occur = 1;
 
-        return null;
+        for(String topic : topics)
+        {
+            if(tallyMap.containsKey(topic) == false)
+            {
+                tallyMap.put(topic, occur);
+            }
+            else
+            {
+                occur = tallyMap.get(topic);
+                tallyMap.replace(topic, occur, occur + 1);
+                occur = 1;
+            }
+        }
+
+        return tallyMap;
     }
 
     /**
      * Tally the occurrences of valid votes for each topic from the provided lists of IDs and topics.
      * 
      * The lists are of equal length and are aligned: the id at index zero cast a vote for
-     * the topic at endex 0, the id at index 1 cast a vote for the topic at index 1, etc.
+     * the topic at index 0, the id at index 1 cast a vote for the topic at index 1, etc.
      * It returns a map where each topic is associated with the number of times it appears in the input.
      * However, any user who did not enter exactly 2 topics should not have their votes counted.
      *
@@ -69,9 +85,62 @@ public class Tallyer {
      * @return a map containing topics as keys and their occurrence counts as values
      */
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
-      // WAVE 2
-      // TODO: Implement this method
+        // WAVE 2
+        Map<String, Integer> filterIDMap = new TreeMap<>();
+        Map<String, Integer> filterTopics = new TreeMap<>();
+        List<String> filterIDList = new ArrayList<>();
+        int occur = 1;
 
-      return null;
+        for(String id : ids)
+        {
+            if(!filterIDMap.containsKey(id))
+            {
+                filterIDMap.put(id, 1);
+            }
+            else
+            {
+                occur = filterIDMap.get(id);
+                filterIDMap.put(id, occur + 1);
+                occur = 1;
+            }
+        }
+
+        for(String theID : filterIDMap.keySet())
+        {
+            if(filterIDMap.get(theID) > 2)
+            {
+                filterIDList.add(theID);
+            }
+        }
+
+        for(String filterID : filterIDList)
+        {
+            for(int i = 0; i < ids.size(); i++)
+            {   
+                if(filterID.equals(ids.get(i)))
+                {
+                    ids.remove(i);
+                    topics.remove(i);
+                }
+            }
+        }
+
+        occur = 1;
+
+        for(String topic : topics)
+            {
+                if(filterTopics.containsKey(topic) == false)
+                {
+                    filterTopics.put(topic, 1);
+                }
+                else if(filterTopics.containsKey(topic) == true)
+                {
+                    occur = filterTopics.get(topic);
+                    filterTopics.put(topic, occur + 1);
+                    occur = 1;
+                }
+            }
+
+        return filterTopics;
   }
 }
