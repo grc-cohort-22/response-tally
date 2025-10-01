@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -50,10 +51,24 @@ public class Tallyer {
      * @return a map containing topics as keys and their occurrence counts as values
      */
     public static Map<String, Integer> tallyTopics(List<String> topics) {
+        //Pseudo code
+        /*
+         * goal we want the occurrences of each topic aka each time it appear
+         * we want to create a HashMap with the topics as the keys and its frequecy
+         * this will be done through a if statment a and a for each loop
+         */
         // WAVE 1
         // TODO: Implement this method
-
-        return null;
+        HashMap<String, Integer> topicsFrequency = new HashMap<>();
+        for(String topic: topics){
+            if (!topicsFrequency.containsKey(topic)) {
+                topicsFrequency.put(topic, 1);
+            }else{
+                topicsFrequency.put(topic, topicsFrequency.get(topic) + 1);
+            }
+        }
+        
+        return topicsFrequency;
     }
 
     /**
@@ -69,9 +84,29 @@ public class Tallyer {
      * @return a map containing topics as keys and their occurrence counts as values
      */
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
+        //Pseudo code
+        /*we want to first put the ids and topics into a map
+         * once in we will check whether and id has appeared more than twice,
+         * or less than once I assume we will probably use some sort of varible to track then update.
+         * after that we will return the ids that only have 2 topics excatly entered
+         */
       // WAVE 2
       // TODO: Implement this method
+      HashMap<String, Integer> tallyOfOnlyTwo = new HashMap<>();
+      HashMap<String, Integer> tallyOfOnlyTwoFinal = new HashMap<>();
+      for (String id : ids) {
+        if (!tallyOfOnlyTwo.containsKey(id)) {
+            tallyOfOnlyTwo.put(id, 1);
+        } else{
+            tallyOfOnlyTwo.put(id, tallyOfOnlyTwo.get(id) + 1);
+        }
+      }
+      for(Map.Entry<String, Integer> entry : tallyOfOnlyTwo.entrySet()){
+        if (entry.getValue() == 2) {
+            tallyOfOnlyTwoFinal.put(entry.getKey(), entry.getValue());
+        }
+      }
 
-      return null;
+      return tallyOfOnlyTwoFinal;
   }
 }
