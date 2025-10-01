@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeSet;
+import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * The Tallyer class provides functionality for reading ID and topic pairs from user input,
@@ -52,8 +55,18 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
+        Map<String, Integer> topicCounts = new HashMap<>();
+        for (String key : topics) {
+            if (!topicCounts.containsKey(key)) {
+                topicCounts.put(key, 1);
+            } else {
+                int currentCount = topicCounts.get(key);
+                int newCount = currentCount + 1;
+                topicCounts.put(key, newCount);
+            }
+        }
 
-        return null;
+        return topicCounts;
     }
 
     /**
@@ -71,7 +84,19 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
+        Map<String, Integer> topicCounts = new HashMap<>();
+        //Not sure how to do this unless we are supposed to use collections.sort but even then I don't know the 
+        //way to enter that.
+        for (String key : topics) {
+            if (!topicCounts.containsKey(key)) {
+                topicCounts.put(key, 1);
+            } else {
+                int currentCount = topicCounts.get(key);
+                int newCount = currentCount + 1;
+                topicCounts.put(key, newCount);
+            }
+        }
 
-      return null;
+        return topicCounts;
   }
 }
