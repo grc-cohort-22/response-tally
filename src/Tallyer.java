@@ -51,7 +51,7 @@ public class Tallyer {
      * @return a map containing topics as keys and their occurrence counts as values
      */
     public static Map<String, Integer> tallyTopics(List<String> topics) {
-        //Psudo code
+        //Pseudo code
         /*
          * goal we want the occurrences of each topic aka each time it appear
          * we want to create a HashMap with the topics as the keys and its frequecy
@@ -84,6 +84,12 @@ public class Tallyer {
      * @return a map containing topics as keys and their occurrence counts as values
      */
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
+        //Pseudo code
+        /*we want to first put the ids and topics into a map
+         * once in we will check whether and id has appeared more than twice,
+         * or less than once I assume we will probably use some sort of varible to track then update.
+         * after that we will return the ids that only have 2 topics excatly entered
+         */
       // WAVE 2
       // TODO: Implement this method
 
