@@ -1,8 +1,12 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * The Tallyer class provides functionality for reading ID and topic pairs from
@@ -93,22 +97,53 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
         // WAVE 2
         // TODO: Implement this method
+        Map<String, Integer> validUsers = new HashMap<>();
 
-        // Votes map
-        Map<String, Integer> votes = new HashMap<>();
-
-        // Populate map
+        // For every student id in ids array
         for (String id : ids) {
             // Check if the id is already in the map
-            if (!votes.containsKey(id)) {
-                votes.put(id, 1);
+            if (validUsers.containsKey(id)) {
+                // id has been found, tally votes
+                validUsers.put(id, validUsers.get(id) + 1);
             } else {
-                votes.put(id, votes.get(id) + 1);
+                // id was not found, create one
+                validUsers.put(id, 1);
             }
         }
 
-        // Disqualify any vote that does not have two topics
+        // Filter all invalid votes
+        // Iterator to safely iterate
+        Iterator<Map.Entry<String, Integer>> iterator = validUsers.entrySet().iterator();
 
-        return null;
+        // Loop through the map with an iterator
+        while (iterator.hasNext()) {
+            // Store current entry
+            Map.Entry<String, Integer> entry = iterator.next();
+
+            // Remove the entry if it does not have two votes
+            if (entry.getValue() != 2) {
+                iterator.remove();
+            }
+        }
+
+        // Only valid users remain in the map from this point
+        // Iterate over topics and make a new map
+        Map<String, Integer> topicVotes = new HashMap<>();
+        System.out.println(validUsers);
+
+        for (int i = 0; i < topics.size(); i++) {
+            // Check if the student is in our valid vote map
+            if (validUsers.containsKey(ids.get(i))) {
+                // Vote is valid, check if the topic
+                if (topicVotes.containsKey(topics.get(i))) {
+                    topicVotes.put(topics.get(i), topicVotes.get(topics.get(i)) + 1);
+                } else {
+                    topicVotes.put(topics.get(i), 1);
+                }
+            }
+        }
+
+        // Return
+        return topicVotes;
     }
 }
