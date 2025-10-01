@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -21,7 +22,7 @@ public class Tallyer {
 
         List<String> ids = new ArrayList<>();
         List<String> topics = new ArrayList<>();
-        
+           
         // Reading input for IDs and topics
         // Assumes file is well formed into pairs
         while (input.hasNext()) {
@@ -52,8 +53,18 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
-
-        return null;
+        Map<String, Integer> topicCounts = new HashMap<>();
+        for (String word : topics) {
+            if (!topicCounts.containsKey(word)) {
+                topicCounts.put(word,1);
+            } else {
+                int currentCount = topicCounts.get(word);
+                int newCount = currentCount + 1;
+                topicCounts.put(word, newCount);
+            }
+        }
+        
+        return topicCounts;
     }
 
     /**
