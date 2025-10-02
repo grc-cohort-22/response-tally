@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.HashMap;
 
 /**
  * The Tallyer class provides functionality for reading ID and topic pairs from user input,
@@ -52,11 +53,12 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
+        Map<String, Integer> topicCount = new java.util.HashMap<>();
         for (String topic : topics) {
-            if (!topicCount.containsKey(topic)) {
-                t
-        
-        return null;
+            topicCount.put(topic, topicCount.getOrDefault(topic, 0) + 1);
+        }
+
+        return topicCount;
     }
 
     /**
@@ -74,7 +76,23 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
+    Map<String, Integer> topicCount = new HashMap<>();
+    Map<String, Integer> idCount = new HashMap<>();
 
-      return null;
+    //for counting the votes per id
+    for (String id : ids)  {
+        idCount.put(id, idCount.getOrDefault(id, 0) + 1);
+    }
+    for (int i = 0; i < ids.size(); i++) {
+        String id = ids.get(i);
+        String topic = topics.get(i);
+
+        //ONLY count the vote if the id voted exactly twice
+        if (idCount.get(id) == 2) {
+            topicCount.put(topic, topicCount.getOrDefault(topic, 0) + 1);
+        }
+    }
+
+    return topicCount;
   }
 }
