@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -21,7 +22,8 @@ public class Tallyer {
 
         List<String> ids = new ArrayList<>();
         List<String> topics = new ArrayList<>();
-        
+
+
         // Reading input for IDs and topics
         // Assumes file is well formed into pairs
         while (input.hasNext()) {
@@ -50,17 +52,27 @@ public class Tallyer {
      * @return a map containing topics as keys and their occurrence counts as values
      */
     public static Map<String, Integer> tallyTopics(List<String> topics) {
+        Map<String, Integer> topicsMap = new HashMap<>();
         // WAVE 1
-        // TODO: Implement this method
+        for (String topic : topics) {
+            if (!topicsMap.containsKey(topic)) {
+                topicsMap.put(topic, 1);
+            }
+            else {
+                int currentTopic = topicsMap.get(topic);
+                int newTopic = currentTopic + 1;
+                topicsMap.put(topic, newTopic);
+            }
+        }
 
-        return null;
+        return topicsMap;
     }
 
     /**
      * Tally the occurrences of valid votes for each topic from the provided lists of IDs and topics.
      * 
      * The lists are of equal length and are aligned: the id at index zero cast a vote for
-     * the topic at endex 0, the id at index 1 cast a vote for the topic at index 1, etc.
+     * the topic at index 0, the id at index 1 cast a vote for the topic at index 1, etc.
      * It returns a map where each topic is associated with the number of times it appears in the input.
      * However, any user who did not enter exactly 2 topics should not have their votes counted.
      *
@@ -68,10 +80,34 @@ public class Tallyer {
      * @param topics a list of strings representing the topics to be tallied
      * @return a map containing topics as keys and their occurrence counts as values
      */
-    public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
-      // WAVE 2
-      // TODO: Implement this method
-
-      return null;
-  }
+public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
+    // WAVE 2
+    // Loop through the ids to find their frequency.
+    Map<String, Integer> votesPerPerson = new HashMap<>();
+    for (String id : ids) {
+        if (!votesPerPerson.containsKey(id)) {
+            votesPerPerson.put(id, 1);
+        }
+        else {
+            votesPerPerson.put(id, votesPerPerson.get(id) + 1);
+        }
+    }
+    System.out.println(votesPerPerson);
+    
+    // Tally only topics with two IDs or more
+    Map<String, Integer> filteredTopics = new HashMap<>();
+    for (int i = 0; i < ids.size(); i++) {
+        String voterId = ids.get(i);
+        String votedTopic = topics.get(i);
+        if (votesPerPerson.get(voterId) == 2) {
+            if (!filteredTopics.containsKey(votedTopic)) {
+                filteredTopics.put(votedTopic, 1);
+            } else {
+                filteredTopics.put(votedTopic, filteredTopics.get(votedTopic) + 1);
+            }
+        }
+        
+    }
+    return filteredTopics;
 }
+};
