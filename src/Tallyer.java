@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -83,8 +85,51 @@ public class Tallyer {
      * @return a map containing topics as keys and their occurrence counts as values
      */
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
-      // WAVE 2
+      // WAVE 2 
       // TODO: Implement this method
+        Map<String, Integer> userOccurances = new HashMap<>();
+        Map<String, String[]> topicMap = new HashMap<>();
+        String[] bannedIDs = {};
+        for (String n : ids) {
+            if (userOccurances.containsKey(n)){
+                userOccurances.replace(n, userOccurances.get(n) + 1);
+            }
+            else{
+                userOccurances.put(n, 1);
+            }
+        }
+        for (Map.Entry<String, Integer> Thing : userOccurances.entrySet()) {
+            if (Thing.getValue() != 2){
+                System.out.println(Thing.getKey() + " was banned for votes not being equal to 2 (" + Thing.getValue() + ")");
+                bannedIDs[bannedIDs.length + 1] = Thing.getKey();
+                userOccurances.remove(Thing.getKey());
+            }
+        }
+        String[] emptyArray = {};
+        for (String topicIndividual : topics) {   
+            if (!topicMap.containsKey(topicIndividual)){
+                topicMap.put(topicIndividual, emptyArray);
+            }
+        }
+        List<String> bannedList = Arrays.asList(bannedIDs);
+        for (String n : ids) {
+            if (!bannedList.contains(n)) {
+                String topicFound = topics.get(ids.indexOf(n));
+                System.out.println(topicFound + " is the value of " + n);
+                //topic gets vote
+                List<String> secondpartOfList = new ArrayList<>();
+                //Does not already exist
+                if (!topicMap.containsKey(topicFound)) {
+                    topicMap.put(n, secondpartOfList);
+                    System.out.println("Topic found, adding to topics: " + topicFound);
+                }
+                else {
+                    // id exists and is not banned, add to topicMap which has topic found
+                    topicMap.replace(topicFound, topicMap.get(seco));
+                }
+            }
+        }
+
 
       return null;
   }
