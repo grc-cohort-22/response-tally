@@ -82,7 +82,9 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
+        Map<String, Integer> topicCountsFiltered = new HashMap<>();
 
-      return null;
-  }
+
+        return null;
+    }
 }
