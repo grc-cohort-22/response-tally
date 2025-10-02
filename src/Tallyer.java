@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,6 +17,7 @@ public class Tallyer {
      *
      * @param args command-line arguments (not used in this implementation)
      */
+    
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
@@ -49,11 +51,23 @@ public class Tallyer {
      * @param topics a list of strings representing the topics to be tallied
      * @return a map containing topics as keys and their occurrence counts as values
      */
+
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
-
-        return null;
+        Map<String, Integer> topicMap = new Hashtable();
+        // String topicID
+        // int topicValue
+        for (String topicID : topics) {
+            if (topicMap.containsKey(topicID)){
+                topicMap.replace(topicID, (topicMap.get(topicID) + 1));
+            }
+            else {
+                topicMap.put(topicID, 1);
+            }
+        }
+        System.out.println(topicMap);
+        return topicMap;
     }
 
     /**
