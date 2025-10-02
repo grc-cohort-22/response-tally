@@ -89,6 +89,15 @@ public class Tallyer {
               validVoters.add(entry.getKey());
           }
       }
-      return null;
+      Map<String, Integer> result = new HashMap<>();
+      for (int i = 0; i < ids.size(); i++) {
+          String currentId = ids.get(i);
+          String currentTopic = topics.get(i);
+          
+          if (validVoters.contains(currentId)) {
+              result.put(currentTopic, result.getOrDefault(currentTopic, 0) + 1);
+          }
+      }
+      return result;
   }
 }
