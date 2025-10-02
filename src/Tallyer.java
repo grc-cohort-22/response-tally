@@ -56,7 +56,7 @@ public class Tallyer {
         // first I will start with an empty hash map
         Map <String ,Integer> topicCounts  = new HashMap<>();
 
-        //for(String name: topicCounts.keySet()){
+      //for(String name: topicCounts.keySet()){
       //System.out.println("key:" + name);
     //}
         
