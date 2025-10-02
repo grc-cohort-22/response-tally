@@ -1,4 +1,6 @@
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -49,11 +51,34 @@ public class Tallyer {
      * @param topics a list of strings representing the topics to be tallied
      * @return a map containing topics as keys and their occurrence counts as values
      */
-    public static Map<String, Integer> tallyTopics(List<String> topics) {
-        // WAVE 1
-        // TODO: Implement this method
+       public static Map<String, Integer> tallyTopics(List<String> topics){ 
+    // WAVE 1
+        // first I will start with an empty hash map
+        Map <String ,Integer> topicCounts  = new HashMap<>();
 
-        return null;
+      //for(String name: topicCounts.keySet()){
+      //System.out.println("key:" + name);
+    //}
+        
+        // counting occurence ofnumbers, lets do the for loop through the list of topics.
+       for(String topic : topics){
+          if(!topicCounts.containsKey(topic)){
+            topicCounts.put(topic, 1);
+          }
+          //return topicCounts;
+        else{
+            int currentCount = topicCounts.get(topic);
+            int newCount = currentCount + 1;
+            topicCounts.put(topic, newCount);
+          //System.out.println(topic);
+          }
+          
+        }
+          return topicCounts;
+       
+        
+
+       //return topicCounts;
     }
 
     /**
