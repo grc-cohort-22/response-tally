@@ -84,7 +84,31 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
-
-    return null;
-  }
+        Map<String, Integer> idCounts = new HashMap<>();
+        for (String id : ids) {
+            if (!idCounts.containsKey(id)) {
+                idCounts.put(id, 1);
+            } else {
+                int currentCount = idCounts.get(id);
+                int newCount = currentCount + 1;
+                idCounts.put(id, newCount);
+            }
+        }    
+            Map<String, Integer> count = new HashMap<>();
+            for (int i = 0; i < ids.size(); i++) {
+                String id = ids.get(i);
+                String topic = topics.get(i);
+        
+                if (idCounts.get(id) == 2) {
+                    if (!count.containsKey(topic)) {
+                        count.put(topic, 1);
+                } else {
+                    int currentCount = count.get(topic);
+                    int newCount = currentCount + 1;
+                    count.put(topic, newCount);
+                    }
+                }
+            }
+        return  count;
+    }
 }
