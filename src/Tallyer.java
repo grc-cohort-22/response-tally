@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * The Tallyer class provides functionality for reading ID and topic pairs from user input,
@@ -52,8 +55,16 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
-
-        return null;
+        Map<String, Integer> map = new HashMap<>();
+        for(String s : topics) {
+            if(!map.containsKey(s)) {
+                map.put(s, 1);
+            } else {
+                int currentCount = map.get(s);
+                map.put(s, ++currentCount);
+            }
+        }
+        return map;
     }
 
     /**
@@ -71,7 +82,22 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
-
-      return null;
+      Map<String, Integer> idCounts = tallyTopics(ids);
+      Set<String> validVoters = new HashSet<>();
+      for (Map.Entry<String, Integer> entry : idCounts.entrySet()) {
+          if (entry.getValue() == 2) {
+              validVoters.add(entry.getKey());
+          }
+      }
+      Map<String, Integer> result = new HashMap<>();
+      for (int i = 0; i < ids.size(); i++) {
+          String currentId = ids.get(i);
+          String currentTopic = topics.get(i);
+          
+          if (validVoters.contains(currentId)) {
+              result.put(currentTopic, result.getOrDefault(currentTopic, 0) + 1);
+          }
+      }
+      return result;
   }
 }
