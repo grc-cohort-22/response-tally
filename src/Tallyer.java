@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -52,8 +53,18 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
+        Map<String, Integer> tallyCounts = new HashMap<>();
 
-        return null;
+        for(String topic : topics){
+            if(!tallyCounts.containsKey(topic)){
+                tallyCounts.put(topic, 1);
+            }else{
+                int currentCount = tallyCounts.get(topic);
+                int newCount = currentCount + 1;
+                tallyCounts.put(topic, newCount);
+            }
+        }
+        return tallyCounts;
     }
 
     /**
@@ -71,7 +82,13 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
+        Map<String, Integer> tallyCounts = new HashMap<>();
+        
 
-      return null;
+
+        for(String id : ids){
+            
+        }
+        return tallyCounts;
   }
 }
