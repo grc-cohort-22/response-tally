@@ -80,47 +80,34 @@ public class Tallyer {
      * @param topics a list of strings representing the topics to be tallied
      * @return a map containing topics as keys and their occurrence counts as values
      */
-    public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
-      // WAVE 2
-      // Loop through the ids to find their frequency.
-        Map<String, Integer> idCounts = new HashMap<>();
-        for (String id : ids) {
-            if (!idCounts.containsKey(id)) {
-                idCounts.put(id, 1);
-            }
-            else {
-                int currentCountOfId = idCounts.get(id);
-                int newCountOfId = currentCountOfId + 1;
-                idCounts.put(id, newCountOfId);
-            }
+public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
+    // WAVE 2
+    // Loop through the ids to find their frequency.
+    Map<String, Integer> votesPerPerson = new HashMap<>();
+    for (String id : ids) {
+        if (!votesPerPerson.containsKey(id)) {
+            votesPerPerson.put(id, 1);
         }
-        System.out.println(idCounts);
-        List<String> badIdsList = new ArrayList<>();
-        // find bad ids and put it into an ArrayList.
-        for (Map.Entry<String, Integer> entry : idCounts.entrySet()) {
-            String key = entry.getKey();
-            Integer value = entry.getValue();
-                if (value != 2) {
-                badIdsList.add(key);
-            }
-        }
-        System.out.println(badIdsList);
-        // Print only those topics that do not contain the bad ids.
-        Map<String, Integer> filteredTopicCounts = new HashMap<>();
-        for (int i = 0; i < ids.size(); i++) {
-            String currentId = ids.get(i);
-            String currentTopic = topics.get(i);
-            if (!badIdsList.contains(currentId)) {
-                if (!filteredTopicCounts.containsKey(currentTopic)) {
-                    filteredTopicCounts.put(currentTopic, 1);
-            }
-            else {
-                int currentCount = filteredTopicCounts.get(currentTopic);
-                int newCount = currentCount + 1;
-                filteredTopicCounts.put(currentTopic, newCount);
-            }
+        else {
+            votesPerPerson.put(id, votesPerPerson.get(id) + 1);
         }
     }
-        return filteredTopicCounts;
+    System.out.println(votesPerPerson);
+    
+    // Tally only topics with two IDs or more
+    Map<String, Integer> filteredTopics = new HashMap<>();
+    for (int i = 0; i < ids.size(); i++) {
+        String voterId = ids.get(i);
+        String votedTopic = topics.get(i);
+        if (votesPerPerson.get(voterId) == 2) {
+            if (!filteredTopics.containsKey(votedTopic)) {
+                filteredTopics.put(votedTopic, 1);
+            } else {
+                filteredTopics.put(votedTopic, filteredTopics.get(votedTopic) + 1);
+            }
+        }
+        
     }
+    return filteredTopics;
+}
 };
