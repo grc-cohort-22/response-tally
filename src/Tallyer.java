@@ -48,10 +48,13 @@ public class Tallyer {
      *
      * @param topics a list of strings representing the topics to be tallied
      * @return a map containing topics as keys and their occurrence counts as values
-     */
+     */ 
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
+        for (String topic : topics) {
+            if (!topicCount.containsKey(topic)) {
+                t
         
         return null;
     }
