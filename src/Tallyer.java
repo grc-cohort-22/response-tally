@@ -89,7 +89,7 @@ public class Tallyer {
       // TODO: Implement this method
         Map<String, Integer> userOccurances = new HashMap<>();
         Map<String, Integer> topicMap = new HashMap<>();
-        String[] bannedIDs = {};
+        String[] bannedIDs = new String[100];
         for (String n : ids) {
             if (userOccurances.containsKey(n)){
                 userOccurances.replace(n, userOccurances.get(n) + 1);
