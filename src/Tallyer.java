@@ -88,7 +88,7 @@ public class Tallyer {
       // WAVE 2 
       // TODO: Implement this method
         Map<String, Integer> userOccurances = new HashMap<>();
-        Map<String, String[]> topicMap = new HashMap<>();
+        Map<String, Integer> topicMap = new HashMap<>();
         String[] bannedIDs = {};
         for (String n : ids) {
             if (userOccurances.containsKey(n)){
@@ -105,10 +105,9 @@ public class Tallyer {
                 userOccurances.remove(Thing.getKey());
             }
         }
-        String[] emptyArray = {};
         for (String topicIndividual : topics) {   
             if (!topicMap.containsKey(topicIndividual)){
-                topicMap.put(topicIndividual, emptyArray);
+                topicMap.put(topicIndividual, 1);
             }
         }
         List<String> bannedList = Arrays.asList(bannedIDs);
@@ -120,17 +119,17 @@ public class Tallyer {
                 List<String> secondpartOfList = new ArrayList<>();
                 //Does not already exist
                 if (!topicMap.containsKey(topicFound)) {
-                    topicMap.put(n, secondpartOfList);
+                    topicMap.put(topicFound, 1);
                     System.out.println("Topic found, adding to topics: " + topicFound);
                 }
                 else {
                     // id exists and is not banned, add to topicMap which has topic found
-                    topicMap.replace(topicFound, topicMap.get(seco));
+                    topicMap.replace(topicFound, (topicMap.get(topicFound) + 1));
                 }
             }
         }
 
 
-      return null;
+      return topicMap;
   }
 }
