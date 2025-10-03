@@ -97,8 +97,9 @@ public class Tallyer {
                 userOccurances.put(n, 1);
             }
         }
+        System.out.println("Current bug is the most recent: " + userOccurances);
         for (Map.Entry<String, Integer> Thing : userOccurances.entrySet()) {
-            if (Thing != null) {
+            if (Thing != null | Thing.getKey() == null | Thing.getValue() == null) {
                 if (Thing.getValue() != 2){
                     System.out.println(Thing.getKey() + " was banned for votes not being equal to 2 (" + Thing.getValue() + ")");
                     bannedIDs.add(Thing.getKey());
