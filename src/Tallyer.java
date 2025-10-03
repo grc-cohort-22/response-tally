@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -89,7 +88,7 @@ public class Tallyer {
       // TODO: Implement this method
         Map<String, Integer> userOccurances = new HashMap<>();
         Map<String, Integer> topicMap = new HashMap<>();
-        String[] bannedIDs = new String[100];
+        List<String> bannedIDs = new ArrayList<>();
         for (String n : ids) {
             if (userOccurances.containsKey(n)){
                 userOccurances.replace(n, userOccurances.get(n) + 1);
@@ -99,10 +98,12 @@ public class Tallyer {
             }
         }
         for (Map.Entry<String, Integer> Thing : userOccurances.entrySet()) {
-            if (Thing.getValue() != 2){
-                System.out.println(Thing.getKey() + " was banned for votes not being equal to 2 (" + Thing.getValue() + ")");
-                bannedIDs[bannedIDs.length + 1] = Thing.getKey();
-                userOccurances.remove(Thing.getKey());
+            if (Thing != null) {
+                if (Thing.getValue() != 2){
+                    System.out.println(Thing.getKey() + " was banned for votes not being equal to 2 (" + Thing.getValue() + ")");
+                    bannedIDs.add(Thing.getKey());
+                    userOccurances.remove(Thing.getKey());
+                }
             }
         }
         for (String topicIndividual : topics) {   
@@ -110,9 +111,8 @@ public class Tallyer {
                 topicMap.put(topicIndividual, 1);
             }
         }
-        List<String> bannedList = Arrays.asList(bannedIDs);
         for (String n : ids) {
-            if (!bannedList.contains(n)) {
+            if (!bannedIDs.contains(n)) {
                 String topicFound = topics.get(ids.indexOf(n));
                 System.out.println(topicFound + " is the value of " + n);
                 //topic gets vote
