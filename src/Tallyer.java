@@ -129,8 +129,8 @@ public class Tallyer {
                 }
             }
         }
-
-
+        // {maps=3, lists=1, loops=3, arrays=1, compound=1}
+        // {lists=1, loops=1, compound=1, arrays=2, maps=2}
       return topicMap;
   }
 }
