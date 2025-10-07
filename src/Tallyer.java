@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,6 +18,7 @@ public class Tallyer {
      *
      * @param args command-line arguments (not used in this implementation)
      */
+    
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
@@ -49,11 +52,23 @@ public class Tallyer {
      * @param topics a list of strings representing the topics to be tallied
      * @return a map containing topics as keys and their occurrence counts as values
      */
+
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
-
-        return null;
+        Map<String, Integer> topicMap = new Hashtable();
+        // String topicID
+        // int topicValue
+        for (String topicID : topics) {
+            if (topicMap.containsKey(topicID)){
+                topicMap.replace(topicID, (topicMap.get(topicID) + 1));
+            }
+            else {
+                topicMap.put(topicID, 1);
+            }
+        }
+        System.out.println(topicMap);
+        return topicMap;
     }
 
     /**
@@ -69,9 +84,53 @@ public class Tallyer {
      * @return a map containing topics as keys and their occurrence counts as values
      */
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
-      // WAVE 2
+      // WAVE 2 
       // TODO: Implement this method
-
-      return null;
+        Map<String, Integer> userOccurances = new HashMap<>();
+        Map<String, Integer> topicMap = new HashMap<>();
+        List<String> bannedIDs = new ArrayList<>();
+        for (String n : ids) {
+            if (userOccurances.containsKey(n)){
+                userOccurances.replace(n, userOccurances.get(n) + 1);
+            }
+            else{
+                userOccurances.put(n, 1);
+            }
+        }
+        System.out.println("Current bug is the most recent: " + userOccurances + "\n\n" + userOccurances.entrySet());
+        for (Map.Entry<String, Integer> Thing : userOccurances.entrySet()) {
+            if (Thing.getValue() != 2){
+                System.out.println(Thing.getKey() + " was banned for votes not being equal to 2 (" + Thing.getValue() + ")");
+                bannedIDs.add(Thing.getKey());
+            }
+        }
+        for (String n : bannedIDs){
+            userOccurances.remove(n);
+        }
+        for (String topicIndividual : topics) {   
+            if (!topicMap.containsKey(topicIndividual)){
+                topicMap.put(topicIndividual, 1);
+            }
+        }
+        for (String n : ids) {
+            if (!bannedIDs.contains(n)) {
+                String topicFound = topics.get(ids.indexOf(n));
+                System.out.println(topicFound + " is the value of " + n);
+                //topic gets vote
+                List<String> secondpartOfList = new ArrayList<>();
+                //Does not already exist
+                if (!topicMap.containsKey(topicFound)) {
+                    topicMap.put(topicFound, 1);
+                    System.out.println("Topic found, adding to topics: " + topicFound);
+                }
+                else {
+                    // id exists and is not banned, add to topicMap which has topic found
+                    topicMap.replace(topicFound, (topicMap.get(topicFound) + 1));
+                }
+            }
+        }
+        // {maps=3, lists=1, loops=3, arrays=1, compound=1}
+        // {lists=1, loops=1, compound=1, arrays=2, maps=2}
+      return topicMap;
   }
 }
